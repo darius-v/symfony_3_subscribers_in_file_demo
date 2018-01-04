@@ -24,7 +24,6 @@ class FormController extends Controller
     {
         $categories = $this->subscriber->getCategories();
 
-        // replace this example code with whatever you need
         return $this->render('subscription/form.html.twig', ['categories' => $categories]);
     }
 
