@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Service\SubscriberService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -35,5 +36,10 @@ class FormController extends Controller
     public function save(Request $request): Response
     {
         $this->subscriber->save($request->get('name'), $request->get('email'), $request->get('categories'));
+
+        $response = new JsonResponse();
+        $response->setData(['success' => 1]);
+
+        return $response;
     }
 }
