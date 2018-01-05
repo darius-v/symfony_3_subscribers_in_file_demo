@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Service\Subscriber;
+use AppBundle\Service\SubscriberService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +12,7 @@ class FormController extends Controller
 {
     private $subscriber;
 
-    public function __construct(Subscriber $subscriber)
+    public function __construct(SubscriberService $subscriber)
     {
         $this->subscriber = $subscriber;
     }
