@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Repository\SubscriberRepository;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use AppBundle\Entity\Subscriber;
@@ -11,10 +12,12 @@ define('CATEGORIES', ['Sports', 'Science']);
 class SubscriberService
 {
     private $validator;
+    private $subscriberRepository;
 
-    public function __construct(ValidatorInterface $validator)
+    public function __construct(ValidatorInterface $validator, SubscriberRepository $subscriberRepository)
     {
         $this->validator = $validator;
+        $this->subscriberRepository = $subscriberRepository;
     }
 
     public function getCategories(): array
@@ -42,5 +45,7 @@ class SubscriberService
 
             throw new ValidatorException($errorsString);
         }
+
+        $this->subscriberRepository->save($subscriber);
     }
 }

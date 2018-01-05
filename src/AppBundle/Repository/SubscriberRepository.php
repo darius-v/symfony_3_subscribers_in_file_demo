@@ -2,10 +2,20 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Subscriber;
+use AppBundle\Service\FileDatabase;
+
 class SubscriberRepository
 {
-    public function saveSubscriber()
-    {
+    private $fileDatabase;
 
+    public function __construct(FileDatabase $fileDatabase)
+    {
+        $this->fileDatabase = $fileDatabase;
+    }
+
+    public function save(Subscriber $subscriber)
+    {
+        $this->fileDatabase->addRecord($subscriber);
     }
 }

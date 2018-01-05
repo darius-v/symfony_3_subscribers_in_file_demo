@@ -5,8 +5,10 @@ namespace AppBundle\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class Subscriber
+class Subscriber extends BaseEntity
 {
+    public $id;
+
     /**
      * @Assert\NotBlank()
      */
