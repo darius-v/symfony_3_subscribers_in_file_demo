@@ -16,6 +16,7 @@ class SubscriberRepository
 
     public function save(Subscriber $subscriber)
     {
+        $subscriber->createdAt = date('Y-m-d');
         $this->fileDatabase->addRecord($subscriber);
     }
 

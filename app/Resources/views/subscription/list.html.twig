@@ -1,26 +1,40 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.css"/>
+{% endblock %}
+
 {% block body %}
 
 <div class="row">
     <div class="col-md-12">
         <table class="table">
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Categories</th>
-            </tr>
-            {% for subscriber in subscribers %}
+            <thead>
                 <tr>
-                    <td>{{ subscriber.name }}</td>
-                    <td>{{ subscriber.email }}</td>
-                    <td>
-                        {{ subscriber.categories | join(', ') }}
-                    </td>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Categories</th>
+                    <th>Registration date</th>
                 </tr>
-            {% endfor %}
+            </thead>
+            <tbody>
+                {% for subscriber in subscribers %}
+                    <tr>
+                        <td>{{ subscriber.name }}</td>
+                        <td>{{ subscriber.email }}</td>
+                        <td>
+                            {{ subscriber.categories | join(', ') }}
+                        </td>
+                        <td>{{ subscriber.createdAt }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
 </div>
 
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('our/js/list.js') }}"></script>
 {% endblock %}

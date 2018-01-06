@@ -25,6 +25,13 @@ class FileDatabase
     public function getAll(): array
     {
         $contents = $this->fileManagement->getContents(static::FILE_NAME);
-        return json_decode($contents, true);
+        $decoded = json_decode($contents, true);
+
+        if (is_null($decoded)) {
+            // happens when file is empty
+            return [];
+        } else {
+            return $decoded;
+        }
     }
 }

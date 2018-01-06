@@ -25,6 +25,8 @@ class Subscriber extends BaseEntity
 
     public $categories;
 
+    public $createdAt;
+
     /**
      * @param ExecutionContextInterface $context
      * @param $payload
