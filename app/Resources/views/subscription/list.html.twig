@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Categories</th>
+            </tr>
+            {% for subscriber in subscribers %}
+                <tr>
+                    <td>{{ subscriber.name }}</td>
+                    <td>{{ subscriber.email }}</td>
+                    <td>
+                        {{ subscriber.categories | join(', ') }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

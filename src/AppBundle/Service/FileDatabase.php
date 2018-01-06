@@ -6,6 +6,7 @@ use AppBundle\Entity\BaseEntity;
 
 class FileDatabase
 {
+    private const FILE_NAME = '../database.json';
     private $fileManagement;
 
     public function __construct(FileManagement $fileManagement)
@@ -15,11 +16,15 @@ class FileDatabase
 
     public function addRecord(BaseEntity $entity)
     {
-        $fileName = '../database.json';
-        $contents = $this->fileManagement->getContents($fileName);
-        $contents = json_decode($contents, true);
+        $contents = $this->getAll();
         $entity->id = uniqid();
         $contents[] = (array)$entity;
-        $this->fileManagement->putContents($fileName, json_encode($contents));
+        $this->fileManagement->putContents(static::FILE_NAME, json_encode($contents));
+    }
+
+    public function getAll(): array
+    {
+        $contents = $this->fileManagement->getContents(static::FILE_NAME);
+        return json_decode($contents, true);
     }
 }

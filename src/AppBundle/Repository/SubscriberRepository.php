@@ -18,4 +18,9 @@ class SubscriberRepository
     {
         $this->fileDatabase->addRecord($subscriber);
     }
+
+    public function getList()
+    {
+        return $this->fileDatabase->getAll();
+    }
 }

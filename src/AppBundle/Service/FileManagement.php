@@ -4,12 +4,13 @@ namespace AppBundle\Service;
 
 class FileManagement
 {
-    public function getContents(string $fileName)
+    public function getContents(string $fileName): string
     {
         if (file_exists($fileName)) {
             return file_get_contents($fileName);
         } else {
             $this->putContents($fileName, '');
+            return '';
         }
     }
 

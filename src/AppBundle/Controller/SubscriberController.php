@@ -37,14 +37,24 @@ class SubscriberController extends Controller
     {
         $this->subscriber->save($request->get('name'), $request->get('email'), $request->get('categories'));
 
+        return $this->jsonResponse();
+    }
+
+    private function jsonResponse(array $data = null): Response
+    {
         $response = new JsonResponse();
-        $response->setData(['success' => 1]);
+        $response->setData(['success' => 1, 'data' => $data]);
 
         return $response;
     }
 
-    public function list()
+    /**
+     * @return Response
+     * @Route("/list", name="list")
+     */
+    public function list(): Response
     {
-
+        $subscribers = $this->subscriber->getList();
+        return $this->render('subscription/list.html.twig', ['subscribers' => $subscribers]);
     }
 }

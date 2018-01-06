@@ -48,4 +48,9 @@ class SubscriberService
 
         $this->subscriberRepository->save($subscriber);
     }
+
+    public function getList(): array
+    {
+        return $this->subscriberRepository->getList();
+    }
 }
