@@ -46,14 +46,14 @@
                 <li><a href="#">List</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Log out</a></li>
+                <li><a href="{{ path('logout') }}">Log out</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
 <div class="container">
 
-    <div class="alert alert-success">
+    <div class="alert alert-success" style="display: none;">
     </div>
 
     {% block body %}{% endblock %}
@@ -68,11 +68,6 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="{{ asset('vendor/ie10-viewport-bug-workaround.js') }}"></script>
 
-<script type="text/javascript">
-    $( document ).ready(function() {
-        $('.alert').hide();
-    });
-</script>
 {% block javascripts %}
 {% endblock %}
 

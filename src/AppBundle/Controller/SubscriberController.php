@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class FormController extends Controller
+class SubscriberController extends Controller
 {
     private $subscriber;
 
@@ -41,5 +41,10 @@ class FormController extends Controller
         $response->setData(['success' => 1]);
 
         return $response;
+    }
+
+    public function list()
+    {
+
     }
 }
