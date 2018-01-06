@@ -1,20 +1,48 @@
 $( document ).ready(function() {
 
-    $('#submit').on('click', function(e) {
-        e.preventDefault();
+    var $submitButton = $('#submit-button');
 
-        var data = {
-            name: $('#name').val(),
-            email: $('#email').val(),
-            categories: $('#categories').val()
-        };
+    $submitButton.prop('disabled', false);
 
-        $.post(saveSubscriberUrl, data, function() {
-            $('form')[0].reset();
+    function showSuccess(text) {
+        var $alertSuccess = $('.alert-success');
+        $alertSuccess.text(text);
+        $alertSuccess.fadeTo(2000, 500).slideUp(1000);
+    }
 
-            $('.alert-success').text('Subscriber added succesfully');
+    $.formUtils.addValidator({
+        name : 'needSelection',
+        validatorFunction : function(value) {
+            return value != null;
+        },
+        errorMessage : 'You need to select at least one option',
+        errorMessageKey: 'optionNotSelected'
+    });
 
-            $('.alert-success').fadeTo(2000, 500).slideUp(1000);
+    $submitButton.on('click', function(e) {
+
+        $.validate({
+
+            onSuccess : function($form) {
+                var data = {
+                    name: $('#name').val(),
+                    email: $('#email').val(),
+                    categories: $('#categories').val()
+                };
+
+                $submitButton.prop('disabled', true);
+
+                $.post(saveSubscriberUrl, data, function() {
+                    $('form')[0].reset();
+
+                    showSuccess('Subscriber added successfully');
+
+                    $submitButton.prop('disabled', false);
+                });
+
+                // stop submitting form
+                return false;
+            }
         });
     })
 });
