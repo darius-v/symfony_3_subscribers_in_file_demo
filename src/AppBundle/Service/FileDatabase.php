@@ -22,6 +22,17 @@ class FileDatabase
         $this->fileManagement->putContents(static::FILE_NAME, json_encode($contents));
     }
 
+    public function updateRecord(BaseEntity $entity)
+    {
+        $records = $this->getAll();
+
+        $position = $this->findPositionById($entity->id, $records);
+
+        $records[$position] = (array)$entity;
+
+        $this->fileManagement->putContents(static::FILE_NAME, json_encode($records));
+    }
+
     public function getAll(): array
     {
         $contents = $this->fileManagement->getContents(static::FILE_NAME);
@@ -32,6 +43,25 @@ class FileDatabase
             return [];
         } else {
             return $decoded;
+        }
+    }
+
+    private function findPositionById(string $id, array $records):? int
+    {
+        $recordIds = array_column($records, 'id');
+        return array_search($id, $recordIds);
+    }
+
+    public function findById(string $id):? array
+    {
+        $records = $this->getAll();
+
+        $position = $this->findPositionById($id, $records);
+
+        if (is_null($position)) {
+            return null;
+        } else {
+            return $records[$position];
         }
     }
 }

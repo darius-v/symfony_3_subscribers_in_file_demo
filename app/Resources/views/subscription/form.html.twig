@@ -2,25 +2,35 @@
 
 {% block body %}
 
+    {# subscriber var only defined when editing it #}
+
     <div class="row">
         <div class="col-md-4">
             <form action="{{ path('save_subscriber') }}" method="post">
+                <input type="hidden" name="id" id="id" value="{{ subscriber.id|default('') }}">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input data-validation="length" data-validation-length="min1" type="text" class="form-control"
-                           id="name" name="name">
+                           id="name" name="name" value="{{ subscriber.name|default('') }}">
                 </div>
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <input type="email" class="form-control"
                            data-validation="email"
-                           id="email" name="email">
+                           id="email" name="email"
+                           value="{{ subscriber.email|default('') }}">
                 </div>
                 <div class="form-group">
                     <label for="categories">Categories</label>
                     <select multiple name="categories[]" id="categories" class="form-control" data-validation="needSelection">
                         {% for category in categories %}
-                            <option value="{{ category }}">{{ category }}</option>
+
+                            {% set selected = '' %}
+                            {% if (subscriber is defined and category in subscriber.categories) %}
+                                {% set selected = 'selected' %}
+                            {% endif %}
+
+                            <option value="{{ category }}" {{ selected }}>{{ category }}</option>
                         {% endfor %}
                     </select>
 

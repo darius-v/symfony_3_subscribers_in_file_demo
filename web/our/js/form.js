@@ -10,6 +10,17 @@ $( document ).ready(function() {
         $alertSuccess.fadeTo(2000, 500).slideUp(1000);
     }
 
+    function clearForm() {
+        $('#id').val('');
+        $('#name').val('');
+        $('#email').val('');
+        $('#categories option').prop('selected', false);
+    }
+
+    function isEditMode() {
+        return $('#id').val();
+    }
+
     $.formUtils.addValidator({
         name : 'needSelection',
         validatorFunction : function(value) {
@@ -27,15 +38,19 @@ $( document ).ready(function() {
                 var data = {
                     name: $('#name').val(),
                     email: $('#email').val(),
+                    id: $('#id').val(),
                     categories: $('#categories').val()
                 };
 
                 $submitButton.prop('disabled', true);
 
                 $.post(saveSubscriberUrl, data, function() {
-                    $('form')[0].reset();
 
-                    showSuccess('Subscriber added successfully');
+                    if (!isEditMode()) {
+                        clearForm();
+                    }
+
+                    showSuccess('Subscriber saved successfully');
 
                     $submitButton.prop('disabled', false);
                 });

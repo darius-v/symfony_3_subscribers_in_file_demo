@@ -17,8 +17,7 @@ class Subscriber extends BaseEntity
     /**
      * @Assert\NotBlank()
      * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email.",
-     *     checkMX = true
+     *     message = "The email '{{ value }}' is not a valid email."
      * )
      */
     public $email;

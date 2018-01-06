@@ -14,14 +14,24 @@ class SubscriberRepository
         $this->fileDatabase = $fileDatabase;
     }
 
-    public function save(Subscriber $subscriber)
+    public function save(Subscriber $subscriber): void
     {
         $subscriber->createdAt = date('Y-m-d');
-        $this->fileDatabase->addRecord($subscriber);
+        if ($subscriber->id) {
+            $this->fileDatabase->updateRecord($subscriber);
+        } else {
+            $this->fileDatabase->addRecord($subscriber);
+        }
+
     }
 
-    public function getList()
+    public function getList(): array
     {
         return $this->fileDatabase->getAll();
+    }
+
+    public function findById(string $id):? array
+    {
+        return $this->fileDatabase->findById($id);
     }
 }

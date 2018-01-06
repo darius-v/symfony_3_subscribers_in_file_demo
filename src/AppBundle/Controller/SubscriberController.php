@@ -35,9 +35,34 @@ class SubscriberController extends Controller
      */
     public function save(Request $request): Response
     {
-        $this->subscriber->save($request->get('name'), $request->get('email'), $request->get('categories'));
+        $this->subscriber->save(
+            $request->get('name'),
+            $request->get('email'),
+            $request->get('id'),
+            $request->get('categories')
+        );
 
         return $this->jsonResponse();
+    }
+
+    /**
+     * @param string $id
+     * @return Response
+     * @Route("/edit/{id}", name="edit_form")
+     */
+    public function editForm(string $id): Response
+    {
+        $subscriber = $this->subscriber->findById($id);
+
+        $categories = $this->subscriber->getCategories();
+
+        return $this->render(
+            'subscription/form.html.twig',
+            [
+                'categories' => $categories,
+                'subscriber' => $subscriber
+            ]
+        );
     }
 
     private function jsonResponse(array $data = null): Response

@@ -3,6 +3,7 @@
 namespace AppBundle\Service;
 
 use AppBundle\Repository\SubscriberRepository;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use AppBundle\Entity\Subscriber;
@@ -25,10 +26,11 @@ class SubscriberService
         return CATEGORIES;
     }
 
-    public function save(string $name, string $email, array $categories = null): void
+    public function save(string $name, string $email, string $id, array $categories = null): void
     {
         $subscriber = new Subscriber();
 
+        $subscriber->id = $id;
         $subscriber->name = $name;
         $subscriber->email = $email;
         $subscriber->categories = $categories;
@@ -52,5 +54,21 @@ class SubscriberService
     public function getList(): array
     {
         return $this->subscriberRepository->getList();
+    }
+
+    /**
+     * @param string $id
+     * @throws Exception
+     * @return array
+     */
+    public function findById(string $id): array
+    {
+        $subscriber = $this->subscriberRepository->findById($id);
+
+        if (is_null($subscriber)) {
+            throw new Exception('Subscriber not found by id ' . $id);
+        }
+
+        return $subscriber;
     }
 }
