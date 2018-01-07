@@ -14,15 +14,20 @@ class FileDatabase
         $this->fileManagement = $fileManagement;
     }
 
-    public function addRecord(BaseEntity $entity)
+    public function addRecord(BaseEntity $entity): void
     {
-        $contents = $this->getAll();
+        $records = $this->getAll();
         $entity->id = uniqid();
-        $contents[] = (array)$entity;
-        $this->fileManagement->putContents(static::FILE_NAME, json_encode($contents));
+        $records[] = (array)$entity;
+        $this->writeArrayToFile($records);
     }
 
-    public function updateRecord(BaseEntity $entity)
+    private function writeArrayToFile(array $records): void
+    {
+        $this->fileManagement->putContents(static::FILE_NAME, json_encode($records));
+    }
+
+    public function updateRecord(BaseEntity $entity): void
     {
         $records = $this->getAll();
 
@@ -30,18 +35,15 @@ class FileDatabase
 
         $records[$position] = (array)$entity;
 
-        $this->fileManagement->putContents(static::FILE_NAME, json_encode($records));
+        $this->writeArrayToFile($records);
     }
 
     public function deleteRecord(string $id)
     {
         $records = $this->getAll();
-
         $position = $this->findPositionById($id, $records);
-
         unset($records[$position]);
-
-        $this->fileManagement->putContents(static::FILE_NAME, json_encode($records));
+        $this->writeArrayToFile($records);
     }
 
     public function getAll(): array
