@@ -32,6 +32,7 @@
                         <td>
                             <a id="delete{{ subscriber.id }}"
                                href="{{ path('delete', {'id': subscriber.id, 'token': csrf_token('tokenId')}) }}">Delete</a>
+                            {{ include('ajax-loader.html.twig') }}
                         </td>
                     </tr>
                 {% endfor %}
