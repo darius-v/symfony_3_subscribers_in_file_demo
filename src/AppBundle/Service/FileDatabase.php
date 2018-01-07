@@ -55,10 +55,16 @@ class FileDatabase
             // happens when file is empty
             return [];
         } else {
-            return $decoded;
+            // array values - so that indexes always be 0, 1, 2,...
+            return array_values($decoded);
         }
     }
 
+    /**
+     * @param string $id
+     * @param array $records - indexes has to be 0, 1, 2, ... - without gaps
+     * @return int|null
+     */
     private function findPositionById(string $id, array $records):? int
     {
         $recordIds = array_column($records, 'id');

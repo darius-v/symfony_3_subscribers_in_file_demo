@@ -51,3 +51,6 @@ services:
     AppBundle\Service\FileDatabase:
         arguments:
             $fileManagement: '@AppBundle\Service\FileManagement'
+
+    AppBundle\Twig\AppExtension:
+        arguments: ["@request_stack"]
