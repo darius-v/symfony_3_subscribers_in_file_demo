@@ -3,7 +3,6 @@
 namespace AppBundle\Service;
 
 use AppBundle\Repository\SubscriberRepository;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use AppBundle\Entity\Subscriber;
@@ -15,8 +14,10 @@ class SubscriberService
     private $validator;
     private $subscriberRepository;
 
-    public function __construct(ValidatorInterface $validator, SubscriberRepository $subscriberRepository)
-    {
+    public function __construct(
+        ValidatorInterface $validator,
+        SubscriberRepository $subscriberRepository
+    ) {
         $this->validator = $validator;
         $this->subscriberRepository = $subscriberRepository;
     }
@@ -26,6 +27,13 @@ class SubscriberService
         return CATEGORIES;
     }
 
+    /**
+     * @param string $name
+     * @param string $email
+     * @param string $id
+     * @param array|null $categories
+     * @throws \Exception
+     */
     public function save(string $name, string $email, string $id, array $categories = null): void
     {
         $subscriber = new Subscriber();

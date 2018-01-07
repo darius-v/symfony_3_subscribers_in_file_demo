@@ -35,6 +35,9 @@
                     </select>
 
                 </div>
+
+                <input type="hidden" id="token" name="token" value="{{ csrf_token('tokenId') }}" />
+
                 <button class="btn btn-default" id="submit-button" disabled>Submit</button>
             </form>
         </div>

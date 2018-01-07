@@ -28,13 +28,23 @@ class SubscriberController extends Controller
         return $this->render('subscription/form.html.twig', ['categories' => $categories]);
     }
 
+    private function checkCsrf(Request $request)
+    {
+        if (!$this->isCsrfTokenValid('tokenId', $request->get('token'))) {
+            throw new \Exception('Token invalid');
+        }
+    }
+
     /**
      * @param Request $request
      * @return Response
      * @Route("/save", name="save_subscriber")
+     * @throws \Exception
      */
     public function save(Request $request): Response
     {
+        $this->checkCsrf($request);
+
         $this->subscriber->save(
             $request->get('name'),
             $request->get('email'),
@@ -85,11 +95,14 @@ class SubscriberController extends Controller
 
     /**
      * @param string $id
+     * @param Request $request
      * @return Response
      * @Route("/delete/{id}", name="delete")
      */
-    public function delete(string $id): Response
+    public function delete(string $id, Request $request): Response
     {
+        $this->checkCsrf($request);
+
         $this->subscriber->delete($id);
 
         $response = new JsonResponse();

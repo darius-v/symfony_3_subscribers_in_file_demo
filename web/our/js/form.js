@@ -39,7 +39,8 @@ $( document ).ready(function() {
                     name: $('#name').val(),
                     email: $('#email').val(),
                     id: $('#id').val(),
-                    categories: $('#categories').val()
+                    categories: $('#categories').val(),
+                    token: $('#token').val()
                 };
 
                 $submitButton.prop('disabled', true);
