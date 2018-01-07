@@ -71,4 +71,9 @@ class SubscriberService
 
         return $subscriber;
     }
+
+    public function delete(string $id)
+    {
+        $this->subscriberRepository->delete($id);
+    }
 }

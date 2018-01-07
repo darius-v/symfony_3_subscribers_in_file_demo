@@ -33,6 +33,17 @@ class FileDatabase
         $this->fileManagement->putContents(static::FILE_NAME, json_encode($records));
     }
 
+    public function deleteRecord(string $id)
+    {
+        $records = $this->getAll();
+
+        $position = $this->findPositionById($id, $records);
+
+        unset($records[$position]);
+
+        $this->fileManagement->putContents(static::FILE_NAME, json_encode($records));
+    }
+
     public function getAll(): array
     {
         $contents = $this->fileManagement->getContents(static::FILE_NAME);

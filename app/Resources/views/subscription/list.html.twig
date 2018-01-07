@@ -16,6 +16,7 @@
                     <th>Categories</th>
                     <th>Registration date</th>
                     <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,7 @@
                         </td>
                         <td>{{ subscriber.createdAt }}</td>
                         <td><a href="{{ path('edit_form', {'id': subscriber.id }) }}">Edit</a></td>
+                        <td><a id="delete{{ subscriber.id }}" href="{{ path('delete', {'id': subscriber.id }) }}">Delete</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

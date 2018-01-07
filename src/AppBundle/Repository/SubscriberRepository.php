@@ -34,4 +34,9 @@ class SubscriberRepository
     {
         return $this->fileDatabase->findById($id);
     }
+
+    public function delete(string $id)
+    {
+        $this->fileDatabase->deleteRecord($id);
+    }
 }

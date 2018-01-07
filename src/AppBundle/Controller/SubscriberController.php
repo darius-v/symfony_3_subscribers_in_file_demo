@@ -82,4 +82,19 @@ class SubscriberController extends Controller
         $subscribers = $this->subscriber->getList();
         return $this->render('subscription/list.html.twig', ['subscribers' => $subscribers]);
     }
+
+    /**
+     * @param string $id
+     * @return Response
+     * @Route("/delete/{id}", name="delete")
+     */
+    public function delete(string $id): Response
+    {
+        $this->subscriber->delete($id);
+
+        $response = new JsonResponse();
+        $response->setData(['success' => 1]);
+
+        return $response;
+    }
 }
