@@ -12,6 +12,8 @@ $( document ).ready(function() {
                 success: function () {
                     table.row($rowToRemove).remove();
                     table.draw();
+
+                    showSuccess('Record deleted successfully');
                 }
             });
         }

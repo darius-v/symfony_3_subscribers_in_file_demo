@@ -4,12 +4,6 @@ $( document ).ready(function() {
 
     $submitButton.prop('disabled', false);
 
-    function showSuccess(text) {
-        var $alertSuccess = $('.alert-success');
-        $alertSuccess.text(text);
-        $alertSuccess.fadeTo(2000, 500).slideUp(1000);
-    }
-
     function clearForm() {
         $('#id').val('');
         $('#name').val('');
