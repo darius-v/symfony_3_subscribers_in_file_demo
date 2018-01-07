@@ -47,7 +47,7 @@ If you are using apache, add something like this to http-vhosts.conf
             Options -MultiViews
             RewriteEngine On
             RewriteCond %{REQUEST_FILENAME} !-f
-            RewriteRule ^(.*)$ index.php [QSA,L]
+            RewriteRule ^(.*)$ app.php [QSA,L]
         </IfModule>
     </Directory>
 </VirtualHost>

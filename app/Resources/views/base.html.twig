@@ -45,9 +45,11 @@
                 <li><a href="{{ path('form') }}">Form </a></li>
                 <li><a href="{{ path('list') }}">List</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ path('logout') }}">Log out</a></li>
-            </ul>
+            {% if app.user %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ path('logout') }}">Log out</a></li>
+                </ul>
+            {% endif %}
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
