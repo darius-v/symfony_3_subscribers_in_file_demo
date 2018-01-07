@@ -33,7 +33,8 @@ Edit your operating system hosts file and add line:
 
 If you are using apache, add something like this to http-vhosts.conf
 
-```<VirtualHost *:80>   
+```
+<VirtualHost *:80>   
     DocumentRoot "E:/path/to/this/project/web"
     ServerName subscribers-demo.com
 	
