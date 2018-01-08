@@ -50,7 +50,7 @@ services:
 
     AppBundle\Service\FileDatabase:
         arguments:
-            $fileManagement: '@AppBundle\Service\FileManagement'
+            $phpAdapter: '@AppBundle\Adapter\PhpAdapter'
 
     AppBundle\Twig\AppExtension:
         arguments: ["@request_stack"]

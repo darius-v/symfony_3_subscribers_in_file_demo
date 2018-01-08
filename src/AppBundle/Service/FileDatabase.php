@@ -2,29 +2,31 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Adapter\PhpAdapter;
 use AppBundle\Entity\BaseEntity;
 
 class FileDatabase
 {
     private const FILE_NAME = '../database.json';
-    private $fileManagement;
+    private $phpAdapter;
 
-    public function __construct(FileManagement $fileManagement)
+    public function __construct(PhpAdapter $phpAdapter)
     {
-        $this->fileManagement = $fileManagement;
+        $this->phpAdapter = $phpAdapter;
     }
 
     public function addRecord(BaseEntity $entity): void
     {
         $records = $this->getAll();
-        $entity->id = uniqid();
+        $entity->id = $this->phpAdapter->uniqueId();
         $records[] = (array)$entity;
+
         $this->writeArrayToFile($records);
     }
 
     private function writeArrayToFile(array $records): void
     {
-        $this->fileManagement->putContents(static::FILE_NAME, json_encode($records));
+        $this->phpAdapter->filePutContents(static::FILE_NAME, json_encode($records));
     }
 
     public function updateRecord(BaseEntity $entity): void
@@ -48,7 +50,7 @@ class FileDatabase
 
     public function getAll(): array
     {
-        $contents = $this->fileManagement->getContents(static::FILE_NAME);
+        $contents = $this->phpAdapter->fileGetContents(static::FILE_NAME);
         $decoded = json_decode($contents, true);
 
         if (is_null($decoded)) {
