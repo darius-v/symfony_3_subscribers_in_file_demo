@@ -48,7 +48,7 @@
         ],
         "post-install-cmd": [
             "@symfony-scripts",
-            "post-install.sh"
+            "bash post-install.sh"
         ],
         "post-update-cmd": [
             "@symfony-scripts"

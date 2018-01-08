@@ -11,7 +11,7 @@ Other notes:
  
 ### Prerequisites
 
-PHP 7 (tested only with 7.1.11)
+PHP 7 (tested only with 7.1+)
 
 Composer https://getcomposer.org/
 
@@ -27,7 +27,10 @@ Web server like nginx, apache.
 
 ```composer install```
 
-Edit your operating system hosts file and add line:
+If you are running on windows, create database.json file in root directory.
+On unix composer will create it automatically.
+
+If using running locally, edit your operating system hosts file and add line:
 
 ```127.0.0.1		subscribers-demo.com```
 
