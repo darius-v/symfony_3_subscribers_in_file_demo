@@ -42,7 +42,7 @@ If you are using apache, add something like this to http-vhosts.conf
     ServerName subscribers-demo.com
 	
    <Directory "E:/path/to/this/project/web">
-        AllowOverride None
+        AllowOverride All
         Order Allow,Deny
         Allow from All
 
