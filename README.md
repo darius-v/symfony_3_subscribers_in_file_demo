@@ -63,3 +63,9 @@ See more here how to configure:
 https://symfony.com/doc/3.4/setup/web_server_configuration.html
 
 If everything is configured well, go to http://subscribers-demo.com/app_dev.php
+
+### Running unit test
+
+In linux:
+```vendor/bin/phpunit```
+
