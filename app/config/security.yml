@@ -43,4 +43,7 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # same path /save is for editing, but editing will be not allowed if not logged in - user will get error
+        # Token invalid
+        - { path: /save$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: ROLE_ADMIN }
