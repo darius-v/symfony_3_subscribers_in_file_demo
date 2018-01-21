@@ -11,7 +11,7 @@ Other notes:
  
 ### Prerequisites
 
-PHP 7 (tested only with 7.1+)
+PHP 7.1+
 
 Composer https://getcomposer.org/
 
